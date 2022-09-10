@@ -1,0 +1,43 @@
+spring:
+  profiles:
+    active: dev
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+#      jdbc:
+#        use_get_generated_keys: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+#        order_updates: true
+        batch_versioned_data: true
+        jdbc:
+          batch_size: 10000
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=skill_swap
+    username: postgres
+    password: password
+    driverClassName: org.postgresql.Driver
+    hikari:
+      maximumPoolSize: 5
+  liquibase:
+    enabled: false
+  data:
+    rest:
+      base-path: /v1
+
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+# Security
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            client-id: "490375770165-36pp83jv26bj2e2j2i1hpb08bh81i4v4.apps.googleusercontent.com"
+#            client-secret: "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"
