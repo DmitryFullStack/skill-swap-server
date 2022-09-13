@@ -1,5 +1,5 @@
 package ru.kirilin.skillswap.entity;
 
-public enum UserOrigin {
+public enum AccountType {
     GOOGLE, INTERNAL
 }

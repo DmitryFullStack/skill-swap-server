@@ -10,7 +10,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -37,17 +36,13 @@ public class User {
     @Setter
     @Embeddable
     @NoArgsConstructor
+    @AllArgsConstructor(staticName = "of")
     @EqualsAndHashCode(onlyExplicitlyIncluded = true)
     public static class AccountId implements Serializable {
         @EqualsAndHashCode.Include
         private String accountNumber;
         @Enumerated(EnumType.STRING)
         @EqualsAndHashCode.Include
-        private UserOrigin accountType;
-
-        public AccountId(String accountNumber, UserOrigin accountType) {
-            this.accountNumber = accountNumber;
-            this.accountType = accountType;
-        }
+        private AccountType accountType;
     }
 }

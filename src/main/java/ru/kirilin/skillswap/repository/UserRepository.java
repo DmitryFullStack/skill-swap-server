@@ -5,5 +5,5 @@ import ru.kirilin.skillswap.entity.User;
 
 import java.util.UUID;
 
-public interface UserRepository extends PagingAndSortingRepository<User, String> {
+public interface UserRepository extends PagingAndSortingRepository<User, User.AccountId> {
 }
