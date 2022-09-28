@@ -1,6 +1,6 @@
-package ru.kirilin.skillswap.controller;
+package ru.kirilin.skillswap.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.kirilin.skillswap.UserDto;
+import ru.kirilin.skillswap.dto.UserDto;
 import ru.kirilin.skillswap.entity.AccountType;
 import ru.kirilin.skillswap.entity.User;
 import ru.kirilin.skillswap.service.UserService;
 
 @RestController
 @RequestMapping("/v1")
+@RequiredArgsConstructor
 public class UserController {
-    @Autowired
 //    private OAuth2AuthorizedClientService authorizedClientService;
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping("/users/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable String id,
-                                               @RequestParam(name = "accountType", required = true) AccountType accountType){
+                                               @RequestParam(name = "accountType") AccountType accountType){
         return ResponseEntity.ok(userService.getUserById(id, accountType));
     }
 

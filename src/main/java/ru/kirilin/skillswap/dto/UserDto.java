@@ -1,4 +1,4 @@
-package ru.kirilin.skillswap;
+package ru.kirilin.skillswap.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.kirilin.skillswap.entity.Gender;

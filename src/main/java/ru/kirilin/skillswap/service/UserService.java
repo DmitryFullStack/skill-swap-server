@@ -3,7 +3,7 @@ package ru.kirilin.skillswap.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kirilin.skillswap.UserDto;
+import ru.kirilin.skillswap.dto.UserDto;
 import ru.kirilin.skillswap.entity.AccountType;
 import ru.kirilin.skillswap.entity.User;
 import ru.kirilin.skillswap.repository.UserRepository;
