@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.kirilin.skillswap.dto.SkillDto;
 import ru.kirilin.skillswap.entity.AccountType;
 import ru.kirilin.skillswap.entity.Skill;
+import ru.kirilin.skillswap.mapper.SkillMapper;
 import ru.kirilin.skillswap.service.SkillService;
 
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.List;
 public class SkillController {
 
     private final SkillService skillService;
+    private final SkillMapper skillMapper;
 
     @GetMapping("/skills")
     public ResponseEntity<List<SkillDto>> getUserSkills(@RequestParam String id,
@@ -31,7 +33,7 @@ public class SkillController {
 
     @GetMapping("/skills/{id}")
     public ResponseEntity<SkillDto> getSkillById(@PathVariable(name = "id") Skill skill){
-        return ResponseEntity.ok(skillService.toDto(skill));
+        return ResponseEntity.ok(skillMapper.toDto(skill));
     }
 
     @PostMapping("/skills")

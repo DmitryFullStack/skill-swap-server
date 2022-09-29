@@ -8,6 +8,7 @@ import ru.kirilin.skillswap.dto.SkillDto;
 import ru.kirilin.skillswap.entity.AccountType;
 import ru.kirilin.skillswap.entity.Skill;
 import ru.kirilin.skillswap.entity.User;
+import ru.kirilin.skillswap.mapper.SkillMapper;
 import ru.kirilin.skillswap.repository.SkillRepository;
 import ru.kirilin.skillswap.repository.UserRepository;
 
@@ -22,9 +23,10 @@ import java.util.stream.Collectors;
 public class SkillService {
     private final SkillRepository skillRepository;
     private final UserRepository userRepository;
+    private final SkillMapper skillMapper;
 
     public SkillDto getSkillById(UUID id){
-        return toDto(skillRepository.findById(id)
+        return skillMapper.toDto(skillRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException(
                         String.format("Skill with id {%S} not found!", id))));
     }
@@ -38,32 +40,17 @@ public class SkillService {
             user = userRepository.findById(User.AccountId.of(userId, accountType))
                     .orElseThrow(() -> new IllegalArgumentException("User not found!"));
         }
-        Skill skill = toEntity(skillDto);
+        Skill skill = skillMapper.toEntity(skillDto);
         skill.setUser(user);
-        return toDto(skillRepository.save(skill));
+        return skillMapper.toDto(skillRepository.save(skill));
     }
 
     public List<SkillDto> getAllUserSkills(String id, AccountType accountType){
         User user = userRepository.findById(User.AccountId.of(id, accountType))
                 .orElseThrow(() -> new IllegalArgumentException("User not found!"));
         return user.getSkills().stream()
-                .map(this::toDto)
+                .map(skillMapper::toDto)
                 .collect(Collectors.toList());
-    }
-
-    public SkillDto toDto(Skill skill){
-        return new SkillDto(
-                skill.getId(),
-                skill.getName(),
-                skill.getLevel(),
-                skill.getPrice());
-    }
-
-    public Skill toEntity(SkillDto skill){
-        return new Skill()
-                .setLevel(skill.level())
-                .setName(skill.name())
-                .setPrice(skill.price());
     }
 
 }

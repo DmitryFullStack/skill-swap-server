@@ -21,6 +21,7 @@ public class Skill {
     private User user;
 
     private String name;
+    private Integer experience;
     private Level level;
     private BigDecimal price;
 }
