@@ -22,6 +22,7 @@ create table if not exists skill_swap.skills
     level               integer,
     name                varchar(255),
     price               numeric(19, 2),
+    experience          int2,
     user_account_number varchar(255),
     user_account_type   varchar(255),
     constraint fk_skills_users
