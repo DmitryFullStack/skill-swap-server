@@ -18,9 +18,11 @@ public class Requirement {
     private UUID id;
 
     @ManyToOne
-//    @JoinColumn(name = "user_id")
     private User user;
 
     private String name;
-    private Level level;
+    private String description;
+    private Integer minExperience;
+    @Enumerated(value = EnumType.STRING)
+    private Gender gender;
 }

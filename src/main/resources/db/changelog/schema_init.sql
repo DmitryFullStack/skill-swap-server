@@ -15,6 +15,7 @@ create table if not exists users (
                         logo varchar(255),
                        name varchar(255)
 );
+
 create table if not exists skill_swap.skills
 (
     id                  uuid not null
@@ -23,6 +24,22 @@ create table if not exists skill_swap.skills
     name                varchar(255),
     price               numeric(19, 2),
     experience          int2,
+    user_account_number varchar(255),
+    user_account_type   varchar(255),
+    constraint fk_skills_users
+        foreign key (user_account_number, user_account_type) references skill_swap.users,
+    unique (name, user_account_number, user_account_type)
+);
+
+create table if not exists skill_swap.requirements
+(
+    id                  uuid not null
+        primary key,
+    level               integer,
+    name                varchar(255) not null ,
+    min_experience      int2,
+    description         varchar(512),
+    gender              varchar(255),
     user_account_number varchar(255),
     user_account_type   varchar(255),
     constraint fk_skills_users
