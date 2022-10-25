@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,5 +42,11 @@ public class SkillController {
                                                 @RequestParam("userId") String userId,
                                                 @RequestParam(name = "accountType") AccountType accountType){
         return ResponseEntity.ok(skillService.createSkill(skillDto, userId, accountType));
+    }
+
+    @PutMapping("/skills/{id}")
+    public ResponseEntity<SkillDto> createSkill(@RequestBody SkillDto skillDto,
+                                                @PathVariable(name = "id") Skill skill){
+        return ResponseEntity.ok(skillService.updateSkill(skillDto, skill));
     }
 }

@@ -1,6 +1,7 @@
 package ru.kirilin.skillswap.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +33,7 @@ public class SkillService {
     }
 
     public SkillDto createSkill(SkillDto skillDto,
-                                @Nullable String userId, 
+                                @Nullable String userId,
                                 @Nullable AccountType accountType){
         assert Objects.nonNull(skillDto) : "Skill Dto must not be null!";
         User user = null;
@@ -53,4 +54,8 @@ public class SkillService {
                 .collect(Collectors.toList());
     }
 
+    public SkillDto updateSkill(SkillDto skillDto, Skill skill) {
+        BeanUtils.copyProperties(skillDto, skill, "id");
+        return skillMapper.toDto(skillRepository.save(skill));
+    }
 }
