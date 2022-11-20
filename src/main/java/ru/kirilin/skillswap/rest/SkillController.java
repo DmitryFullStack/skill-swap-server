@@ -3,6 +3,7 @@ package ru.kirilin.skillswap.rest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,8 +46,13 @@ public class SkillController {
     }
 
     @PutMapping("/skills/{id}")
-    public ResponseEntity<SkillDto> createSkill(@RequestBody SkillDto skillDto,
+    public ResponseEntity<SkillDto> updateSkill(@RequestBody SkillDto skillDto,
                                                 @PathVariable(name = "id") Skill skill){
         return ResponseEntity.ok(skillService.updateSkill(skillDto, skill));
+    }
+
+    @DeleteMapping("/skills/{id}")
+    public ResponseEntity<Integer> archiveSkill(@PathVariable(name = "id") Skill skill){
+        return ResponseEntity.ok(skillService.archiveSkill(skill));
     }
 }

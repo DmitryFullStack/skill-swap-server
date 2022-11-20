@@ -24,4 +24,5 @@ public class Skill {
     private Integer experience;
     private Level level;
     private BigDecimal price;
+    private boolean archive;
 }

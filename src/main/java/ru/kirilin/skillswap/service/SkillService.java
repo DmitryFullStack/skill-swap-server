@@ -50,6 +50,7 @@ public class SkillService {
         User user = userRepository.findById(User.AccountId.of(id, accountType))
                 .orElseThrow(() -> new IllegalArgumentException("User not found!"));
         return user.getSkills().stream()
+                .filter(skill -> !skill.isArchive())
                 .map(skillMapper::toDto)
                 .collect(Collectors.toList());
     }
@@ -57,5 +58,9 @@ public class SkillService {
     public SkillDto updateSkill(SkillDto skillDto, Skill skill) {
         BeanUtils.copyProperties(skillDto, skill, "id");
         return skillMapper.toDto(skillRepository.save(skill));
+    }
+
+    public int archiveSkill(Skill skill) {
+        return skillRepository.setSkillArchiveTrue(skill.getId());
     }
 }

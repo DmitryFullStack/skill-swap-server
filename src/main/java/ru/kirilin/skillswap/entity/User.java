@@ -10,6 +10,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -23,7 +24,7 @@ public class User {
 
     private String login;
     private String name;
-    private String logo;
+    private UUID logoId;
     private int age;
     @Enumerated(EnumType.STRING)
     private Gender gender;

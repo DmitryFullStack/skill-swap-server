@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.kirilin.skillswap.dto.UserDto;
 import ru.kirilin.skillswap.entity.AccountType;
 import ru.kirilin.skillswap.entity.User;
+import ru.kirilin.skillswap.mapper.UserMapper;
 import ru.kirilin.skillswap.repository.UserRepository;
 
 @Service
@@ -13,6 +14,7 @@ import ru.kirilin.skillswap.repository.UserRepository;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     public UserDto getUserById(String id, AccountType accountType){
         return toDto(userRepository.findById(User.AccountId.of(id, accountType))
@@ -25,7 +27,11 @@ public class UserService {
 
     private UserDto toDto(User user){
         return new UserDto(user.getLogin(),
-                user.getName(), user.getLogo(), user.getAge(),
+                user.getName(), user.getLogoId(), user.getAge(),
                 user.getGender());
+    }
+
+    public UserDto updateUser(User user) {
+        return userMapper.toDto(userRepository.save(user));
     }
 }

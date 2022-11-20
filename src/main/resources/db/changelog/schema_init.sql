@@ -12,7 +12,7 @@ create table if not exists users (
                        age varchar(50) not null,
                        gender int4,
                        login varchar(255),
-                        logo varchar(255),
+                       logoId uuid,
                        name varchar(255)
 );
 
@@ -26,6 +26,7 @@ create table if not exists skill_swap.skills
     experience          int2,
     user_account_number varchar(255),
     user_account_type   varchar(255),
+    archive             boolean not null default false,
     constraint fk_skills_users
         foreign key (user_account_number, user_account_type) references skill_swap.users,
     unique (name, user_account_number, user_account_type)
@@ -42,7 +43,14 @@ create table if not exists skill_swap.requirements
     gender              varchar(255),
     user_account_number varchar(255),
     user_account_type   varchar(255),
+    archive             boolean not null default false,
     constraint fk_skills_users
         foreign key (user_account_number, user_account_type) references skill_swap.users,
     unique (name, user_account_number, user_account_type)
+);
+
+create table if not exists files (
+            id uuid primary key,
+            type varchar(50),
+            data bytea
 );

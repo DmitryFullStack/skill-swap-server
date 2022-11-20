@@ -67,4 +67,8 @@ public class RequirementService {
         BeanUtils.copyProperties(requirementDto, requirement, "id");
         return requirementMapper.toDto(requirementRepository.save(requirement));
     }
+
+    public int archiveRequirement(Requirement requirement) {
+        return requirementRepository.setRequirementArchiveTrue(requirement.getId());
+    }
 }

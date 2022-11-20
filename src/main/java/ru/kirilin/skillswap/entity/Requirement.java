@@ -25,4 +25,5 @@ public class Requirement {
     private Integer minExperience;
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
+    private boolean archive;
 }

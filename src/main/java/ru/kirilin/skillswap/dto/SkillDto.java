@@ -9,5 +9,8 @@ public record SkillDto(
         UUID id,
         String name,
         Level level,
-        BigDecimal price) {
+        BigDecimal price,
+
+        Integer experience
+        ) {
 }

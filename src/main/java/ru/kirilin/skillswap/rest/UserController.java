@@ -6,10 +6,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import ru.kirilin.skillswap.dto.UserDto;
 import ru.kirilin.skillswap.entity.AccountType;
 import ru.kirilin.skillswap.entity.User;
@@ -31,6 +34,11 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<UserDto> createUser(@RequestBody User user){
         return ResponseEntity.ok(userService.createUser(user));
+    }
+
+    @PutMapping("/users")
+    public ResponseEntity<UserDto> updateUser(@RequestBody User user){
+        return ResponseEntity.ok(userService.updateUser(user));
     }
 
 //    @GetMapping("/registration")
