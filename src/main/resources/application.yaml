@@ -41,3 +41,11 @@ spring:
 #          google:
 #            client-id: "490375770165-36pp83jv26bj2e2j2i1hpb08bh81i4v4.apps.googleusercontent.com"
 #            client-secret: "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"
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: TRACE
